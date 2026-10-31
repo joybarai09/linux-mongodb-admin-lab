@@ -1,0 +1,3 @@
+subscription_id       = "YOUR-AZURE-SUBSCRIPTION-ID"
+admin_ip_cidr         = "YOUR-PUBLIC-IP/32"
+ssh_public_key_path   = "~/.ssh/id_ed25519.pub"

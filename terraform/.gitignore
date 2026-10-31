@@ -1,0 +1,26 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+terraform.tfvars
+crash.log
+
+# Terraform variable files
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# Terraform state and plans
+*.tfstate*
+*.tfplan
+.terraform.tfstate.lock.info
+
+# Terraform crash logs
+crash.log
+crash.*.log
+
+# Environment files and credentials
+.env
+.env.*
+*.pem
+*.key
