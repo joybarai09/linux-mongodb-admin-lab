@@ -35,7 +35,7 @@ MongoDB traffic is private to the virtual network on TCP 27017. Do not expose th
 - Compressed full replica-set archives using `mongodump --archive --gzip --oplog`
 - Separate MongoDB users: `backupAgent` with the `backup` role and `restoreAgent` with the `restore` role
 - Protected credential configuration files outside the repository
-- Gzip archive integrity checks
+- Gzip and SHA-256 integrity checks
 - Test restores into a separate `restore_test` database
 - Cron scheduling every Saturday at 07:30 Asia/Kolkata
 
@@ -50,7 +50,6 @@ CRON_TZ=Asia/Kolkata
 
 ### Documentation
 
-See:
 - [Backup and restore runbook](docs/mongodb-backup-restore/README.md)
 - [Architecture](docs/mongodb-backup-restore/architecture.md)
 - [Security notes](docs/mongodb-backup-restore/security.md)
