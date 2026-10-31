@@ -20,7 +20,7 @@ mkdir -p ~/.config
 chmod 700 ~/.config
 ```
 
-Copy the examples and edit locally:
+Copy the examples from the repository and edit locally:
 
 ```bash
 cp configs/mongodump.yml.example ~/.config/mongodump.yml
@@ -33,9 +33,15 @@ Replace each placeholder password locally. Never commit the real files or share 
 ## Create backup directories
 
 ```bash
-mkdir -p ~/mongodb-backups/{daily,weekly,monthly,logs,restore-tests}
+mkdir -p ~/mongodb-backups/{weekly,logs,restore-tests}
 chmod 700 ~/mongodb-backups
-chmod 700 ~/mongodb-backups/{daily,weekly,monthly,logs,restore-tests}
+chmod 700 ~/mongodb-backups/{weekly,logs,restore-tests}
+```
+
+## Make scripts executable
+
+```bash
+chmod 700 scripts/mongodb-backup.sh scripts/mongodb-restore-test.sh
 ```
 
 ## Manual backup
@@ -64,8 +70,7 @@ sha256sum -c mongodb-rs0-YYYYMMDD-HHMMSS.archive.gz.sha256
 The test restore maps only `replication_lab.*` into `restore_test.*`. It does not use `--drop`.
 
 ```bash
-./scripts/mongodb-restore-test.sh \
-  ~/mongodb-backups/weekly/mongodb-rs0-YYYYMMDD-HHMMSS.archive.gz
+./scripts/mongodb-restore-test.sh ~/mongodb-backups/weekly/mongodb-rs0-YYYYMMDD-HHMMSS.archive.gz
 ```
 
 Verify the restored data from mongosh on a MongoDB node:
@@ -109,6 +114,6 @@ This is a weekly Saturday backup, not a daily backup.
 - The full replica-set archive includes databases visible to the backup account, including the temporary `restore_test` database unless the backup scope is deliberately changed.
 - `--oplog` is intended for a full replica-set dump. Do not add `--db` or `--collection` to this workflow.
 - The namespace-mapped test restore does not replay the captured oplog. A complete disaster recovery restore is a separate procedure.
-- A gzip test validates the compressed stream, not application-level recoverability. Run restore tests regularly.
-- The local host01 disk used in this lab was 30 GB. Size separate backup storage based on measured data size, growth, and retention.
+- Gzip and checksum checks validate the archive bytes, not application-level recoverability. Run restore tests regularly.
+- The local host01 disk used in this lab was 30 GB. Size separate backup storage based on measured data volume, growth, and retention.
 - Copy encrypted backups to independent off-host storage. A backup on the same VM is not sufficient for disaster recovery.
