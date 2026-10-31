@@ -1,0 +1,3 @@
+# Saturday at 07:30 India Standard Time
+CRON_TZ=Asia/Kolkata
+30 7 * * 6 /home/sysadmin/linux-mongodb-admin-lab/scripts/mongodb-backup.sh
