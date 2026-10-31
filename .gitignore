@@ -1,0 +1,31 @@
+# Secrets and local credentials
+.config/
+*.secret
+*.pem
+*.key
+*.crt
+*.p12
+mongodump.yml
+mongorestore.yml
+terraform.tfvars
+
+# Backup data and logs
+*.archive
+*.archive.gz
+*.bson
+*.metadata.json
+*.log
+mongodb-backups/
+
+# Terraform state
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
